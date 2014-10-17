@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        function User( properties ) {
+            //这里一定要声明一个变量来指向当前的instance
+            var objthis = this;
+            for ( var i in properties ) {
+                (function(){
+                    //在闭包内，t每次都是新的，而 properties[i] 的值是for里面的
+                    // 经过for后，会有多个t分别在不同的局部作用域（匿名函数）中，并且在下面的方法定义中有对其引用所以产生了闭包，t的值将会一直存在
+                    var t = properties[i];
+                    objthis[ "get" + i ] = function() { return t;};
+                    objthis[ "set" + i ] = function(val) {t = val;};
+
+                })();
+            }
+        }
+
+        //测试代码
+        var user = new User({
+            name: "Bob",
+            age: 44
+        });
+
+        alert( user.getname());
+        alert( user.getage());
+
+        user.setname("Mike");
+        alert( user.getname());
+        alert( user.getage());
+
+        user.setage( 22 );
+        alert( user.getname());
+        alert( user.getage());
+    </script>
+</head>
+<body>
+
+</body>
+</html>

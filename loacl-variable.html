@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+
+<body>
+<button id="btn">确定</button>
+
+<script>
+    (function(){
+        var i = 0;
+
+        var node = document.querySelector('#btn');
+
+        function innerFunc (){
+            var j = 0;
+            i ++;
+            j ++;
+            console.log(i);
+            console.log(j);
+        }
+
+        node.addEventListener('click',innerFunc,false);
+
+        innerFunc();
+        innerFunc();
+
+    }())
+
+</script>
+</body>
+</html>
